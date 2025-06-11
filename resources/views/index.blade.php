@@ -24,6 +24,7 @@
                         <th class="py-2 px-4 border-b">Nazwisko</th>
                         <th class="py-2 px-4 border-b">Email</th>
                         <th class="py-2 px-4 border-b">Telefon</th>
+                        <th class="py-2 px-4 border-b">Akcje</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,6 +34,9 @@
                             <td class="py-2 px-4 border-b">{{ $client->last_name }}</td>
                             <td class="py-2 px-4 border-b">{{ $client->email }}</td>
                             <td class="py-2 px-4 border-b">{{ $client->phone ?? 'Brak' }}</td>
+                            <td class="py-2 px-4 border-b">
+                                <a href="{{ route('clients.show', $client) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-xs">Szczegóły</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -48,7 +52,7 @@
             <div class="mt-3">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-medium text-gray-900">Dodaj nowego klienta</h3>
-                    <button id="closeModalBtn" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                    <button id="closeModalBtn" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto items-center">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
@@ -124,11 +128,11 @@
                     <div class="flex justify-end space-x-3 mt-6">
                         <button type="button"
                                 id="cancelModalBtn"
-                                class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                                class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400">
                             Anuluj
                         </button>
                         <button type="submit"
-                                class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
                             Dodaj klienta
                         </button>
                     </div>
