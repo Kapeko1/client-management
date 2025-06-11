@@ -7,9 +7,6 @@ use App\Models\Client;
 use App\Models\CompanyRepresentative;
 use App\Services\ClientService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Log\Logger;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Illuminate\Validation\ValidationException;
 
@@ -33,7 +30,7 @@ class ClientController extends Controller
                 ->with('modal_open', true);
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Wystąpił błąd podczas dodawania klienta: ' . $e->getMessage())
+                ->with('error', 'Wystąpił błąd podczas dodawania klienta.')
                 ->withInput()
                 ->with('modal_open', true);
         }
@@ -48,20 +45,4 @@ class ClientController extends Controller
         $client->delete();
         return redirect()->route('clients.index')->with('success', 'Klient został usunięty.');
     }
-    public function addRepresentative(Request $request, Client $client): RedirectResponse
-    {
-        $request->validate([
-            'representative_id' => 'required|exists:company_representatives,id',
-        ]);
-
-        $client->companyRepresentatives()->attach($request->representative_id);
-
-        return redirect()->route('clients.show', $client)->with('success', 'Opiekun został dodany.');
-    }
-    public function removeRepresentative(Client $client, CompanyRepresentative $representative): RedirectResponse
-    {
-        $client->companyRepresentatives()->detach($representative->id);
-        return redirect()->route('clients.show', $client)->with('success', 'Opiekun został usunięty.');
-    }
-
 }

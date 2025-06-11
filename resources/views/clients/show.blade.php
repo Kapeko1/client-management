@@ -46,7 +46,7 @@
                                 <span class="font-medium">{{ $representative->first_name }} {{ $representative->last_name }}</span>
                                 <span class="text-sm text-gray-600">- {{ $representative->department->label() }}</span>
                             </div>
-                            <form action="{{ route('clients.representatives.remove', ['client' => $client, 'representative' => $representative]) }}" method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć tego opiekuna?');">
+                            <form action="{{ route('representatives.destroy', $representative) }}" method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć tego opiekuna?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-sm">X</button>
@@ -60,7 +60,7 @@
         </div>
 
         <h3 class="text-lg font-semibold mb-2">Dodaj opiekuna</h3>
-        <form action="{{ route('clients.representatives.add', $client) }}" method="POST">
+        <form action="{{ route('clients.representatives.store', $client) }}" method="POST">
             @csrf
             <div class="flex items-center">
                 <select name="representative_id" class="block w-full bg-white border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
