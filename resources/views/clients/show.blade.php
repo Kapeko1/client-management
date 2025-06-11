@@ -63,7 +63,7 @@
         <form action="{{ route('clients.representatives.store', $client) }}" method="POST">
             @csrf
             <div class="flex items-center">
-                <select name="representative_id" class="block w-full bg-white border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <select name="representative_id" class="block w-full bg-white border-gray-300 rounded-md shadow-sm">
                     <option hidden>Wybierz opiekuna</option>
                     @foreach($all_representatives->diff($client->companyRepresentatives) as $representative)
                         <option value="{{ $representative->id }}">{{ $representative->first_name }} {{ $representative->last_name }} - {{$representative->department->label()}}</option>
