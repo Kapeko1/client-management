@@ -2,9 +2,9 @@
 
 @section('content')
     <div class="container mx-auto">
-        <div class="flex justify-between items-center mb-6">
+        <a href="{{ route('clients.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Powrót</a>
+        <div class="m-6">
             <h1 class="text-2xl font-bold">Szczegóły klienta</h1>
-            <a href="{{ route('clients.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Powrót</a>
         </div>
 
         @if(session('success'))
