@@ -51,7 +51,7 @@ Uruchom migracje, aby stworzyć tabele w bazie danych:
 php artisan migrate
 ```
 
-Opcjonalnie polecam wypełnić bazę danych przykładowymi danymi:
+Opcjonalnie polecam wypełnić bazę danych przykładowymi danymi (klientów oraz opiekunów). Żeby dodać samych opiekunów trzeba edytować `database/seeders/DatabaseSeeder.php`:
 ```bash
 php artisan db:seed
 ```

@@ -23,11 +23,14 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $representatives = CompanyRepresentative::factory()->count(10)->create();
+        //Poniższy kod trzeba usunąć, żeby dodać tylko opiekunów
+        //---------------------------
         $clients = Client::factory()->count(50)->create();
 
         $clients->each(function ($client) use ($representatives) {
             $representativesToAttach = $representatives->random(rand(1, 3))->pluck('id');
             $client->companyRepresentatives()->attach($representativesToAttach);
         });
+        //-------------------------
     }
 }
