@@ -13,11 +13,6 @@
             <span class="block sm:inline">{{ session('success') }}</span>
         </div>
     @endif
-    @if(session('error'))
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-            <span class="block sm:inline">{{ session('error') }}</span>
-        </div>
-    @endif
 
     <div class="bg-white p-8 rounded-lg shadow-md">
         <div class="overflow-x-auto">
@@ -48,7 +43,7 @@
         </div>
     </div>
 
-    <div id="clientModal" class="fixed inset-0 hidden overflow-y-auto h-full w-full z-50" style="background-color: rgba(0, 0, 0, 0.5);">
+    <div id="clientModal" class="fixed inset-0 {{ session('modal_open') || $errors->any() ? '' : 'hidden' }} overflow-y-auto h-full w-full z-50" style="background-color: rgba(0, 0, 0, 0.5);">
         <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div class="mt-3">
                 <div class="flex justify-between items-center mb-4">
@@ -60,40 +55,56 @@
                     </button>
                 </div>
 
+                @if(session('error'))
+                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <span class="block sm:inline">{{ session('error') }}</span>
+                    </div>
+                @endif
                 <form action="{{ route('clients.store') }}" method="POST" class="space-y-4">
                     @csrf
-
                     <div>
                         <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">
-                            Imię <span class="text-red-500">*</span>
+                            Imię
                         </label>
                         <input type="text"
                                name="first_name"
                                id="first_name"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               value="{{ old('first_name') }}"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('first_name') border-red-500 @enderror"
                                required>
+                        @error('first_name')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
                         <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1">
-                            Nazwisko <span class="text-red-500">*</span>
+                            Nazwisko
                         </label>
                         <input type="text"
                                name="last_name"
                                id="last_name"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               value="{{ old('last_name') }}"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('last_name') border-red-500 @enderror"
                                required>
+                        @error('last_name')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-                            Email <span class="text-red-500">*</span>
+                            Email
                         </label>
                         <input type="email"
                                name="email"
                                id="email"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               value="{{ old('email') }}"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror"
                                required>
+                        @error('email')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
@@ -103,7 +114,11 @@
                         <input type="tel"
                                name="phone"
                                id="phone"
-                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                               value="{{ old('phone') }}"
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('phone') border-red-500 @enderror">
+                        @error('phone')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="flex justify-end space-x-3 mt-6">
@@ -160,8 +175,6 @@
             function closeModal() {
                 modal.addClass('hidden');
                 modal.find('form')[0].reset();
-                $('.text-red-500.text-sm').remove();
-                $('input').removeClass('border-red-500');
             }
 
             closeModalBtn.on('click', closeModal);

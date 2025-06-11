@@ -5,7 +5,6 @@ namespace App\DTOs;
 use Illuminate\Container\Attributes\Database;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Attributes\Validation\Rule;
-
 class ClientData extends Data   {
     public function __construct(
         #[Rule(['required', 'string', 'max:255'])]
@@ -20,4 +19,11 @@ class ClientData extends Data   {
         #[Rule(['nullable', 'string', 'max:255'])]
         public readonly ?string $phone,
     )   {}
+
+    public static function messages(): array
+    {
+        return [
+            'email.unique' => 'Klient z takim adresem email już istnieje!',
+        ];
+    }
 }

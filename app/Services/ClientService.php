@@ -7,13 +7,13 @@ use App\Models\Client;
 
 class ClientService {
 
-    public function createClient($validatedData): Client
+    public function createClient(ClientData $clientData): Client
     {
         return Client::create([
-            'first_name' => $validatedData->first_name,
-            'last_name' => $validatedData->last_name,
-            'email' => $validatedData->email,
-            'phone' => $validatedData->phone,
+            'first_name' => $clientData->first_name,
+            'last_name' => $clientData->last_name,
+            'email' => $clientData->email,
+            'phone' => $clientData->phone,
         ]);
     }
 
