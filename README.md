@@ -11,7 +11,7 @@ Ponadto korzystam z paczki dodatkowej zależności `spatie/laravel-data`, które
 ## 1. Klonowanie repozytorium
 ```bash
 git clone https://github.com/Kapeko1/client-management.git
-cd clientManagement
+cd client-management
 ```
 
 ## 2. Instalacja paczek composera
