@@ -19,9 +19,13 @@ class ClientCompanyRepresentativeController extends Controller
 
         return redirect()->route('clients.show', $client)->with('success', 'Opiekun został dodany.');
     }
-    public function destroy(Client $client, CompanyRepresentative $representative): RedirectResponse
+    public function destroy(Request $request, CompanyRepresentative $representative): RedirectResponse
     {
-        $client->companyRepresentatives()->detach($representative->id);
-        return redirect()->route('clients.show', $client)->with('success', 'Opiekun został usunięty.');
+        $data = $request->validate([
+            'client_id' => 'required|exists:clients,id'
+        ]);
+
+        $representative->clients()->detach($data['client_id']);
+        return redirect()->route('clients.show', ['client' => $data['client_id']])->with('success', 'Opiekun został usunięty.');
     }
 }

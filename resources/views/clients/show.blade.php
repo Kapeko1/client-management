@@ -49,6 +49,7 @@
                             <form action="{{ route('representatives.destroy', $representative) }}" method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć tego opiekuna?');">
                                 @csrf
                                 @method('DELETE')
+                                <input type="hidden" name="client_id" value="{{ $client->id }}">
                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-sm">X</button>
                             </form>
                         </li>
